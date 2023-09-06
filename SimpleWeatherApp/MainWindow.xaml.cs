@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleWeatherApp.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace SimpleWeatherApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Session _session = new Session();
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = _session;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -35,12 +38,17 @@ namespace SimpleWeatherApp
 
         }
 
-        private void SimpleWeatherButton_Copy_Click(object sender, RoutedEventArgs e)
+        private void SimpleWeatherButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

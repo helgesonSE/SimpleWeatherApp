@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace SimpleWeatherApp.WeatherClasses
+public class CurrentConditions
 {
-    class WeatherReport
-    {
-    }
+    public string datetime { get; set; }
+    public double temp { get; set; }
+    public double precip { get; set; }
+    public string conditions { get; set; }
 }
+
+
+public class WeatherReport
+{
+    public string address { get; set; }
+    public CurrentConditions currentConditions { get; set; }
+
+}
+
