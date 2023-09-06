@@ -1,0 +1,40 @@
+﻿<Window x:Class="SimpleWeatherApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleWeatherApp"
+        mc:Ignorable="d"
+        FontSize="14pt"
+        Title="Simple Weather App" Height="700" Width="855">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="1"/>
+            <GradientStop Color="#FFDBE3EF" Offset="0"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <TextBox x:Name="LocationSearchBox" TextWrapping="Wrap" Text="" Margin="47,81,563,570" TextChanged="TextBox_TextChanged" FontSize="18"/>
+        <Label x:Name="EnterLocationLabel" Content="Enter a location:" Margin="47,42,563,608"/>
+        <Button x:Name="SimpleWeatherButton" Content="Simple" HorizontalAlignment="Left" Margin="311,81,0,0" VerticalAlignment="Top" Height="56" Width="108"/>
+        <Button x:Name="AdvancedWeatherButton" Content="Advanced" HorizontalAlignment="Left" Margin="433,81,0,0" VerticalAlignment="Top" Height="56" Width="108" Click="Button_Click"/>
+        <Label x:Name="ButtonInformation" Content="Type of weather report:" Margin="311,42,314,608"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="47,194,47,47">
+            <Grid Margin="-1,-1,-1,-1">
+                <Label x:Name="LocationLabel" Content="Location" Margin="0,0,544,409" FontWeight="Bold"/>
+                <Label x:Name="SelectedLocationLabel" Content="___" Margin="0,39,437,370"/>
+                <Label x:Name="CurrentTemperatureLabel" Content="Current Temperature" Margin="0,78,544,331" FontWeight="Bold"/>
+                <Label x:Name="SelectedCurrentTemperatureLabel" Content="___" Margin="0,117,437,292"/>
+                <Label x:Name="PrecipitationLabel" Content="Precipitation" Margin="0,156,544,253" FontWeight="Bold"/>
+                <Label x:Name="CurrentPrecipitationLabel" Content="___" Margin="0,195,437,214"/>
+                <Label x:Name="CurrentWeatherTypeLabel" Content="SUNNY" Margin="402,39,30,292" FontSize="48"/>
+                <Button x:Name="ReloadButton" Content="Reload Data" HorizontalAlignment="Left" Margin="566,311,0,0" VerticalAlignment="Center" Height="106" Width="165" Click="ReloadButton_Click"/>
+            </Grid>
+
+        </Border>
+        <ComboBox Margin="563,81,47,570"/>
+        <Label x:Name="OldSearchesLabel" Content="Previous results:" Margin="563,42,62,608"/>
+
+
+    </Grid>
+</Window>
