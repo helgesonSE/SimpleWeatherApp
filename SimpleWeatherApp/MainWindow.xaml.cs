@@ -43,7 +43,14 @@ namespace SimpleWeatherApp
 
         private void GenerateWeather_Click(object sender, RoutedEventArgs e)
         {
-            _session.currentWeatherReport = ReportFactory.CreateWeatherClassFor(LocationSearchBox.Text);
+            _session.CreateReportFor(LocationSearchBox.Text);
+            //_session.currentWeatherReport = ReportFactory.CreateWeatherClassFor(LocationSearchBox.Text);
+            if (_session.currentWeatherReport == null)
+                SearchMessageLabel.Content = "Location could not be found";
+            else if (_session.hasPreviousSearch == true)
+                SearchMessageLabel.Content = "No new weather data\nfor that location";
+            else
+                SearchMessageLabel.Content = "";
             LocationSearchBox.Text = "";
         }
 

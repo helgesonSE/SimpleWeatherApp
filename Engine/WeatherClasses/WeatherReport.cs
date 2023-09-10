@@ -9,13 +9,13 @@ namespace Engine.WeatherClasses
 {
     public class CurrentConditions : BaseNotificationClass
     {
-        private string _datetime;
-        private double _temp;
-        private double _precip;
-        private double _windspeed;
-        private double _winddir;
-        private string _conditions;
-        public string datetime
+        private string? _datetime;
+        private double? _temp;
+        private double? _precip;
+        private double? _windspeed;
+        private double? _winddir;
+        private string? _conditions;
+        public string? datetime
         {
             get { return _datetime; }
             set
@@ -24,7 +24,7 @@ namespace Engine.WeatherClasses
                 OnPropertyChanged("datetime");
             }
         }
-        public double temp
+        public double? temp
         {
             get { return _temp; }
             set
@@ -33,7 +33,7 @@ namespace Engine.WeatherClasses
                 OnPropertyChanged("temp");
             }
         }
-        public double precip
+        public double? precip
         {
             get { return _precip; }
             set
@@ -42,7 +42,7 @@ namespace Engine.WeatherClasses
                 OnPropertyChanged("precip");
             }
         }
-        public double windspeed
+        public double? windspeed
         {
             get { return _windspeed; }
             set
@@ -51,7 +51,7 @@ namespace Engine.WeatherClasses
                 OnPropertyChanged("windspeed");
             }
         }
-        public double winddir
+        public double? winddir
         {
             get { return _winddir; }
             set
@@ -60,7 +60,7 @@ namespace Engine.WeatherClasses
                 OnPropertyChanged("windir");
             }
         }
-        public string conditions
+        public string? conditions
         {
             get { return _conditions; }
             set

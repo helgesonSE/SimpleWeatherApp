@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine.WeatherClasses;
+using System.Collections.ObjectModel;
 
 namespace Engine.ViewModels
 {
@@ -20,18 +21,23 @@ namespace Engine.ViewModels
                 OnPropertyChanged("currentWeatherReport");
             }
         }
+        public ObservableCollection<WeatherReport> PreviousSearches { get; set; }
+        public bool hasPreviousSearch { get; set; }
+
         public Session()
         {
             currentWeatherReport = new WeatherReport();
-            //currentWeatherReport = ReportFactory.CreateWeatherClassFor("Stockholm");
-            //currentWeatherReport = CreateWeatherClassFor();
+            PreviousSearches = new ObservableCollection<WeatherReport>();
+            
         }
-        //public WeatherReport CreateWeatherClassFor()
-        //{
-        //    WebClient web = new WebClient();
-        //    string jsonString = web.DownloadString("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Stockholm/2023-09-08/2023-09-08?unitGroup=metric&elements=datetime%2Ctemp%2Cprecip%2Cconditions&include=current&key=FN8HKXRP359JYANWM9LPMBBH3&options=nonulls&contentType=json");
-
-        //    return JsonConvert.DeserializeObject<WeatherReport>(jsonString);
-        //}
+        public void CreateReportFor(string location)
+        {
+            currentWeatherReport = ReportFactory.GetWeatherDataFor(location);
+            hasPreviousSearch = (PreviousSearches.Any(WeatherReport => WeatherReport.address == location) &&
+                                      PreviousSearches.Any(WeatherReport => WeatherReport.currentConditions.datetime ==
+                                                                        currentWeatherReport.currentConditions.datetime));
+            if (currentWeatherReport != null && hasPreviousSearch == false)                
+                PreviousSearches.Add(currentWeatherReport);
+        }
     }
 }
