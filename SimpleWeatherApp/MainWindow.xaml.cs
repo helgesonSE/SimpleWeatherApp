@@ -1,5 +1,4 @@
-﻿using SimpleWeatherApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Engine.WeatherClasses;
+using Engine.ViewModels;
+using Engine.Factories;
 
 namespace SimpleWeatherApp
 {
@@ -39,9 +41,15 @@ namespace SimpleWeatherApp
 
         }
 
-        private void SimpleWeatherButton_Click_1(object sender, RoutedEventArgs e)
+        private void GenerateWeather_Click(object sender, RoutedEventArgs e)
         {
-            
+            _session.currentWeatherReport = ReportFactory.CreateWeatherClassFor(LocationSearchBox.Text);
+            LocationSearchBox.Text = "";
+        }
+
+        private void LocationSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

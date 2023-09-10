@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWeatherApp", "SimpleWeatherApp\SimpleWeatherApp.csproj", "{E4C8F997-C7DE-4E1D-BA8E-402B6291770C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWeatherApp", "SimpleWeatherApp\SimpleWeatherApp.csproj", "{E4C8F997-C7DE-4E1D-BA8E-402B6291770C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{ADB99F8E-364E-494F-98D1-160726B0EAC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E4C8F997-C7DE-4E1D-BA8E-402B6291770C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4C8F997-C7DE-4E1D-BA8E-402B6291770C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4C8F997-C7DE-4E1D-BA8E-402B6291770C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB99F8E-364E-494F-98D1-160726B0EAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB99F8E-364E-494F-98D1-160726B0EAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB99F8E-364E-494F-98D1-160726B0EAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB99F8E-364E-494F-98D1-160726B0EAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

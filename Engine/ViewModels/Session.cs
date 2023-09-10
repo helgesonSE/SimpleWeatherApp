@@ -1,24 +1,29 @@
-﻿using System;
+﻿using Engine.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
-using System.Security.Policy;
-using System.Net;
-using Newtonsoft.Json;
-using SimpleWeatherApp.Factories;
+using Engine.WeatherClasses;
 
-namespace SimpleWeatherApp.ViewModels
+namespace Engine.ViewModels
 {
-    public class Session
+    public class Session : BaseNotificationClass
     {
-
-        public WeatherReport currentWeatherReport { get; set; }
+        private WeatherReport _currentWeatherReport;
+        public WeatherReport currentWeatherReport
+        {
+            get { return _currentWeatherReport; }
+            set 
+            { 
+                _currentWeatherReport = value;
+                OnPropertyChanged("currentWeatherReport");
+            }
+        }
         public Session()
         {
             currentWeatherReport = new WeatherReport();
-            currentWeatherReport = ReportFactory.CreateWeatherClassFor("Stockholm");
+            //currentWeatherReport = ReportFactory.CreateWeatherClassFor("Stockholm");
             //currentWeatherReport = CreateWeatherClassFor();
         }
         //public WeatherReport CreateWeatherClassFor()
