@@ -8,11 +8,10 @@
         mc:Ignorable="d"
         FontSize="14pt"
         Title="Simple Weather App" Height="700" Width="855" ResizeMode="NoResize">
+    <!--Gets data from Session class-->
     <Window.DataContext>
         <ViewModels:Session/>
     </Window.DataContext>
-
-
 
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -32,27 +31,29 @@
             <ColumnDefinition Width="517*"/>
             <ColumnDefinition Width="51*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="LocationSearchBox" TextWrapping="Wrap" Text="" Margin="0,81,0,0" TextChanged="LocationSearchBox_TextChanged" FontSize="18" Width="245" Height="56" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="245" MaxWidth="245" MinHeight="56" MaxHeight="56" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button x:Name="SimpleWeatherButton" Content="Generate Weather Report" HorizontalAlignment="Left" Margin="28,81,0,0" VerticalAlignment="Top" Height="56" Width="231" Grid.Column="2" Click="GenerateWeather_Click"/>
-
-        <ComboBox Margin="274,81,0,492" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" MinWidth="175" MinHeight="28"
-  
-                  ItemsSource="{Binding PreviousSearches}"
-                  DisplayMemberPath="address"
-                  
-                  
-                  
-                  />
+        
+        <!--Top row elements-->
         <Label x:Name="EnterLocationLabel" Content="Enter a location:" Margin="0,46,67,0" VerticalAlignment="Top" Grid.Column="1" Height="35"/>
+        <TextBox x:Name="LocationSearchBox" TextWrapping="Wrap" Text="" Margin="0,81,0,0" TextChanged="LocationSearchBox_TextChanged" FontSize="18" Width="245" Height="56" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="245" MaxWidth="245" MinHeight="56" MaxHeight="56" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Column="1" Grid.ColumnSpan="2"/>
+        
+        <Button x:Name="GenerateReportButton" Content="Generate Weather Report" HorizontalAlignment="Left" Margin="28,81,0,0" VerticalAlignment="Top" Height="56" Width="231" Grid.Column="2" Click="GenerateWeather_Click"/>
+        
         <Label x:Name="PreviousReportLabel" Content="Previous results:" Margin="272,46,68,0" VerticalAlignment="Top" Grid.Column="2" Height="35"/>
-        <Button x:Name="ReloadButton" Content="Reload Data" HorizontalAlignment="Left" Margin="313,488,0,0" VerticalAlignment="Top" Height="106" Width="166" Click="ReloadButton_Click" Grid.Column="2"/>
+        <ComboBox Margin="274,81,0,492" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" MinWidth="175" MinHeight="28"
+                  ItemsSource="{Binding PreviousSearches}"
+                  SelectedItem="{Binding currentWeatherReport}"
+                  DisplayMemberPath="ComboBoxDisplay"/>
+        
+        <!--Weather Data Display-->
+        <Label Content="{Binding currentWeatherReport.currentConditions.conditions}" Grid.Column="2" MinHeight="130" HorizontalAlignment="Left" VerticalAlignment="Top" Height="130" Width="230" 
+               Margin="245,182,0,0" MinWidth="230" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White"/>
         <Label Content="Location" Grid.Column="1" Margin="10,177,32,396" Width="194" FontWeight="Bold" MinHeight="35"/>
         <Label Content="{Binding currentWeatherReport.address}" Grid.Column="1" Margin="10,233,32,340" Width="194" MinHeight="35"/>
         <Label Content="Temperature" Grid.Column="1" Margin="10,292,32,281" Width="194" FontWeight="Bold" MinHeight="35"/>
         <Label Content="{Binding currentWeatherReport.currentConditions.temp}" Grid.Column="1" Margin="10,348,32,225" Width="194" MinHeight="35"/>
         <Label Content="Precipitation" Grid.Column="1" Margin="10,409,32,164" Width="194" FontWeight="Bold" MinHeight="35"/>
         <Label Content="{Binding currentWeatherReport.currentConditions.precip}" Grid.Column="1" Margin="10,463,32,110" Width="194" MinHeight="35"/>
-        <Label Content="{Binding currentWeatherReport.currentConditions.conditions}" Grid.Column="2" MinHeight="130" HorizontalAlignment="Left" VerticalAlignment="Top" Height="130" Width="230" Margin="245,182,0,0" MinWidth="230" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White"/>
         <Label Content="Time" Grid.Column="2" Margin="28,177,295,396" Width="194" FontWeight="Bold" MinHeight="35"/>
         <Label Content="{Binding currentWeatherReport.currentConditions.datetime}" Grid.Column="2" Margin="28,236,295,337" Width="194" MinHeight="35"/>
         <Label Content="Wind Speed" Grid.Column="2" Margin="28,292,295,281" Width="194" FontWeight="Bold" MinHeight="35"/>
@@ -64,10 +65,11 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
+        
+        <!--Bottom row elements-->
+        <Button x:Name="ReloadButton" Content="Reload Data" HorizontalAlignment="Left" Margin="313,488,0,0" VerticalAlignment="Top" Height="106" Width="166" Click="ReloadButton_Click" Grid.Column="2"/>   
+        
         <Label x:Name="SearchMessageLabel" Content="" Grid.Column="1" Margin="0,524,376,0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="22"/>
-
-
-
 
     </Grid>
 </Window>

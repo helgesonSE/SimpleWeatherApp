@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Engine
 {
     public class BaseNotificationClass : INotifyPropertyChanged
     {
+        //Purpose of class is to reduce amounts of repeated code. Right now only Session.cs uses it, but we might have need for additional classes in the future.
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
