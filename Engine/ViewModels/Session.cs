@@ -6,8 +6,7 @@ namespace Engine.ViewModels
 {
     public class Session : BaseNotificationClass
     {
-        //This class keeps the WeatherReport instance which we show to the user (currentWeatherReport). The word "current" is used by variables in WeatherReports.cs,
-        //so I will consider a different naming for this. currentWeatherReport communicates to the bindings in the xaml via OnPropertyChanged.
+        //This class keeps the WeatherReport instance which we show to the user (LiveWeatherReport). LiveWeatherReport communicates to the bindings in the xaml via OnPropertyChanged.
         private WeatherReport _liveWeatherReport;
         private string _searchMessageText;
 
@@ -48,7 +47,7 @@ namespace Engine.ViewModels
             {
                 //If there is new weather data for a location, or if it hasnt been searched for, we also create a string to use as a display value in our combobox.
                 //The resulting WeatherClass instance is added to the list of previous searches. We then check for faulty searches here in order to update elements
-                //of the UI. If the WeatherReport was null, we reset the value to an empty WeatherRport.
+                //of the UI. If the WeatherReport was null, we reset the value to an empty WeatherReport.
                 _liveWeatherReport.ComboBoxDisplay = $"{_liveWeatherReport.address} - {_liveWeatherReport.currentConditions.datetime}";
                 PreviousSearches.Add(LiveWeatherReport);
                 SearchMessageText = "";
