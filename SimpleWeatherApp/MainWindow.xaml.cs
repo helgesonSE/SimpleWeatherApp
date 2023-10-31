@@ -17,24 +17,15 @@ namespace SimpleWeatherApp
 
         private void GenerateWeather_Click(object sender, RoutedEventArgs e)
         {
-            //Sends the user input to our intermediary in the session class. Currently we also check for faulty searches here in order to update elements
-            //of the UI, which is hardly a neat solution. It will be moved out of this .cs further on.
             _session.CreateReportFor(LocationSearchBox.Text);
-
-            if (_session.currentWeatherReport == null)
-                SearchMessageLabel.Content = "Location could not be found";
-            else if (_session.hasPreviousSearch == true)
-                SearchMessageLabel.Content = "No new weather data\nfor that location";
-            else
-                SearchMessageLabel.Content = "";
             LocationSearchBox.Text = "";
         }
 
         private void ReloadButton_Click(object sender, RoutedEventArgs e)
         {
-            //A previous search addres should always get results, so we do not check for null results here for now. Will proof further on. Aside from that,
+            //A previous search adress should always get results, so we do not check for null results here for now. Will proof further on. Aside from that,
             //this command performs the same actions as GenerateWeather_Click.
-            _session.CreateReportFor(_session.currentWeatherReport.address);
+            _session.CreateReportFor(_session.LiveWeatherReport.address);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

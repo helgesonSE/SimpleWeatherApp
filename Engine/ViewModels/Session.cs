@@ -8,22 +8,31 @@ namespace Engine.ViewModels
     {
         //This class keeps the WeatherReport instance which we show to the user (currentWeatherReport). The word "current" is used by variables in WeatherReports.cs,
         //so I will consider a different naming for this. currentWeatherReport communicates to the bindings in the xaml via OnPropertyChanged.
-        private WeatherReport _currentWeatherReport;
-        public WeatherReport currentWeatherReport
+        private WeatherReport _liveWeatherReport;
+        private string _searchMessageText;
+
+        public WeatherReport LiveWeatherReport
         {
-            get { return _currentWeatherReport; }
+            get { return _liveWeatherReport; }
             set 
             { 
-                _currentWeatherReport = value;
-                OnPropertyChanged("currentWeatherReport");
+                _liveWeatherReport = value;
+                OnPropertyChanged("liveWeatherReport");
+            }
+        }
+        public string SearchMessageText
+        {
+            get { return _searchMessageText; }
+            set
+            {
+                _searchMessageText = value;
+                OnPropertyChanged("searchMessageText");
             }
         }
         public ObservableCollection<WeatherReport> PreviousSearches { get; set; }   //This list is used by the combobox to display results.
-        public bool hasPreviousSearch { get; set; }    //For now. Helps determine what message should be shown to the user in GenerateWeather_Click of the Mainwindow.xaml.cs.
-
         public Session()
         {
-            currentWeatherReport = new WeatherReport();
+            LiveWeatherReport = new WeatherReport();
             PreviousSearches = new ObservableCollection<WeatherReport>();
             
         }
@@ -31,16 +40,27 @@ namespace Engine.ViewModels
         {
             //Gets weather data for out instance of WeatherReport via the factory. We then check if the readings for that location are different from the ones we have. We cannot
             //know beforehand if the report we get back will have fresher data that the previous one until we actually fetch it.
-            currentWeatherReport = ReportFactory.LoadWeatherDataFor(location);
-            hasPreviousSearch = (PreviousSearches.Any(WeatherReport => WeatherReport.address == location) &&    //Checks for matching search addresses and times.
+            LiveWeatherReport = ReportFactory.LoadWeatherDataFor(location);
+            bool HasPreviousSearch = (PreviousSearches.Any(WeatherReport => WeatherReport.address == location) &&    //Checks for matching search addresses and times.
                                       PreviousSearches.Any(WeatherReport => WeatherReport.currentConditions.datetime ==
-                                                                        currentWeatherReport.currentConditions.datetime));
-            if (currentWeatherReport != null && hasPreviousSearch == false) 
+                                                                        LiveWeatherReport.currentConditions.datetime));
+            if (LiveWeatherReport != null && HasPreviousSearch == false)
             {
                 //If there is new weather data for a location, or if it hasnt been searched for, we also create a string to use as a display value in our combobox.
-                //The resulting WeatherCLass isntance is added to the list of previous searches.
-                _currentWeatherReport.ComboBoxDisplay = $"{_currentWeatherReport.address} - {_currentWeatherReport.currentConditions.datetime}";
-                PreviousSearches.Add(currentWeatherReport);
+                //The resulting WeatherClass instance is added to the list of previous searches. We then check for faulty searches here in order to update elements
+                //of the UI. If the WeatherReport was null, we reset the value to an empty WeatherRport.
+                _liveWeatherReport.ComboBoxDisplay = $"{_liveWeatherReport.address} - {_liveWeatherReport.currentConditions.datetime}";
+                PreviousSearches.Add(LiveWeatherReport);
+                SearchMessageText = "";
+            }
+            else if (LiveWeatherReport == null)
+            {
+                SearchMessageText = "Location could not be found";
+                LiveWeatherReport = new WeatherReport();
+            }
+            else if (HasPreviousSearch == true)
+            {
+                SearchMessageText = "No new weather data\nfor that location";
             }
         }
     }
